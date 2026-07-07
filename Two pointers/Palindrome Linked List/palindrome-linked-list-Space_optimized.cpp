@@ -1,5 +1,6 @@
 /*
   Space Optimized (O(1))
+  "Tortoise and the Hare" algorithm
 */
 
 /*
@@ -20,6 +21,10 @@
   2. Reverse the second half of the list in-place.
   3. Compare the first half and the reversed second half.
 
+  NOTES:
+  - For odd-length lists, slow lands on the middle node, and reversing from there still works because the middle element is compared with itself.
+  - The code is functionally correct for both odd and even lengths.
+
   COMPLEXITY:
   - Time: O(n) -> Single pass to find middle, reverse, and compare.
   - Space: O(1) -> Modified the list in-place without extra structures.
@@ -31,5 +36,43 @@ class Solution
 public:
   bool isPalindrome(ListNode *head)
   {
+    if (head == nullptr || head->next == nullptr)
+      return true;
+
+    // Step 1: Find the middle of the linked list (Fast & Slow Concept)
+    ListNode *slow = head;
+    ListNode *fast = head;
+    // while (fast && fast->next)
+    while (fast != nullptr && fast->next != nullptr)
+    {
+      slow = slow->next;
+      fast = fast->next->next;
+    }
+
+    // Step 2: Reverse the second half of the list in-place
+    ListNode *prev = nullptr;
+    ListNode *curr = slow;
+    while (curr != nullptr)
+    {
+      ListNode *next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    // Step 3: Standard Two-Pointer convergence comparison
+    ListNode *firstHalf = head;
+    ListNode *secondHalf = prev;
+    while (secondHalf)
+    {
+      if (firstHalf->val != secondHalf->val)
+      {
+        return false;
+      }
+      firstHalf = firstHalf->next;
+      secondHalf = secondHalf->next;
+    }
+
+    return true;
   }
 };
