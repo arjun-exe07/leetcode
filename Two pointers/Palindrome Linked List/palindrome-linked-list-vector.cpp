@@ -17,6 +17,12 @@
  * COMPLEXITY:
  * - Time: O(n) -> Linear time to copy the nodes and iterate up to the midpoint.
  * - Space: O(n) -> Requires extra memory to store the node values in the vector.
+ *
+ * DIFFERENTIATION:
+ * - Unlike the space-optimized version (fast/slow pointer + reverse),
+ *   this approach trades space for simplicity by using a vector.
+ * - Space-optimized: O(1) space, more complex logic with in-place reversal.
+ * - Vector approach: O(n) space, simpler and more intuitive logic.
  */
 
 class Solution
