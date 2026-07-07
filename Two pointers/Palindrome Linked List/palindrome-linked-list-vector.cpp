@@ -30,26 +30,28 @@ class Solution
 public:
   bool isPalindrome(ListNode *head)
   {
-    vector<int> queue;
-    int rear = -1;
-    int front = 0;
+    vector<int> arr;
+
     ListNode *temp = head;
 
-    // Step 1: Copy linked list values into a sequential vector
+    // Copy linked list values into vector
     while (temp != nullptr)
     {
-      rear++;
-      queue.push_back(temp->val);
+      arr.push_back(temp->val);
       temp = temp->next;
     }
 
-    // Step 2 & 3: Standard converging Two-Pointer approach
-    while (front <= rear)
+    int front = 0;
+    int rear = arr.size() - 1;
+
+    // Compare from both sides
+    while (front < rear)
     {
-      if (queue[front] != queue[rear])
+      if (arr[front] != arr[rear])
       {
         return false;
       }
+
       front++;
       rear--;
     }
