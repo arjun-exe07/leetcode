@@ -27,16 +27,16 @@ class Solution
 public:
   int minOperations(vector<string> &logs)
   {
-    int count = 0;
+    int top = 0;
     int len = logs.size();
 
     for (int i = 0; i < len; i++)
     {
       if (logs[i] == "../")
       {
-        if (count)
+        if (top)
         {
-          count--;
+          top--;
         }
       }
       else if (logs[i] == "./")
@@ -45,9 +45,9 @@ public:
       }
       else
       {
-        count++; // Move to a child folder
+        top++; // Move to a child folder
       }
     }
-    return count;
+    return top;
   }
 };
